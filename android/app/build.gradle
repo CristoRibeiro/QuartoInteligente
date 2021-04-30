@@ -1,6 +1,16 @@
-apply plugin: "com.android.application"
-
 import com.android.build.OutputFile
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.8'
+    }
+}
+apply plugin: "com.android.application"
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -97,7 +107,6 @@ def enableSeparateBuildPerCPUArchitecture = false
  * Run Proguard to shrink the Java bytecode in release builds.
  */
 def enableProguardInReleaseBuilds = false
-
 /**
  * The preferred build flavor of JavaScriptCore.
  *
@@ -121,6 +130,8 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+
+    buildToolsVersion = rootProject.ext.buildToolsVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -129,8 +140,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.babaeletronicacristo"
-        minSdkVersion rootProject.ext.minSdkVersion
+        applicationId "com.quartointeligente"
+        minSdkVersion 26
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -159,7 +170,9 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled false
+            shrinkResources false
+
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
@@ -181,6 +194,8 @@ android {
 }
 
 dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:2.4.15'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

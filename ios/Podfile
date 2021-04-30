@@ -3,12 +3,17 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'babaEletronicaCristo' do
+target 'quartoInteligente' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'babaEletronicaCristoTests' do
+
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
+  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
+
+  target 'quartoInteligenteTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +28,10 @@ target 'babaEletronicaCristo' do
   end
 end
 
-target 'babaEletronicaCristo-tvOS' do
-  # Pods for babaEletronicaCristo-tvOS
+target 'quartoInteligente-tvOS' do
+  # Pods for quartoInteligente-tvOS
 
-  target 'babaEletronicaCristo-tvOSTests' do
+  target 'quartoInteligente-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
