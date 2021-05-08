@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { Form as FormMobile } from '@unform/mobile';
+import Slider from '@react-native-community/slider';
 
 export const Container = styled.View`
   flex: 1;
@@ -48,4 +49,9 @@ export const CreateAccountText = styled.Text`
 
 export const Form = styled(FormMobile)`
   width: 100%;
+`;
+
+export const SliderConfig = styled(Slider)`
+  width: 100%;
+  height: 50;
 `;

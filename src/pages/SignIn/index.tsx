@@ -4,7 +4,6 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  Switch,
   TextInput,
   View,
 } from 'react-native';
@@ -14,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 // import BluetoothSerial from 'react-native-bluetooth-serial';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+
 import Logo from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -26,6 +26,7 @@ import {
   CreateAccountButton,
   CreateAccountText,
   Form,
+  SliderConfig,
 } from './style';
 import getValidationErrors from '../../utils/getValidationErrors';
 import { useAuth } from '../../hooks/auth';
@@ -131,11 +132,15 @@ const SignIn: React.FC = () => {
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}
               />
+              <SliderConfig
+                minimumValue={0}
+                maximumValue={10}
+                minimumTrackTintColor="#ff9000"
+                maximumTrackTintColor="#ff9000"
+              />
               <Button onPress={() => formRef.current?.submitForm()}>
                 Entrar
               </Button>
-
-              <Switch onValueChange={handleToggle} value={toggle} />
             </Form>
 
             <ForgetPassword onPress={() => console.log('deu2')}>

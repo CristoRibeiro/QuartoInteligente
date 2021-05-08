@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { RectButton, PanGestureHandler } from 'react-native-gesture-handler';
+import Slider from '@react-native-community/slider';
 
 export const Container = styled(RectButton)`
   width: 100%;
