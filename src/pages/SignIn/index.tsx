@@ -1,51 +1,43 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import BluetoothSerial from 'react-native-bluetooth-serial-next';
-import BackgroundTimer from 'react-native-background-timer';
+import React, { useRef } from 'react';
+import { KeyboardAvoidingView, Platform, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { FormHandles } from '@unform/core';
+import Button from '../../components/Button';
+import { Container, Title, Form } from './style';
 
-const SingIn: React.FC = () => {
-  const [isConnected, setConnected] = useState(false);
-  const [data, setData] = useState('');
+interface SignInDataForm {
+  email: string;
+  password: string;
+}
 
-  const log = useCallback(data => {
-    console.log(data);
-  }, []);
+const SignIn: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
 
-  const init = useCallback(async () => {
-    await BluetoothSerial.requestEnable();
-
-    const isEnabled = await BluetoothSerial.isEnabled();
-
-    if (isEnabled) {
-      const devices = await BluetoothSerial.list();
-      console.log(devices);
-
-      const device = await BluetoothSerial.connect('98:D3:B1:F3:1C:DF');
-      console.log(device);
-
-      const conectado = await BluetoothSerial.isConnected();
-      setConnected(conectado);
-
-      // if (isConnected) {
-
-      BackgroundTimer.start();
-
-      console.log('teste');
-      BluetoothSerial.read((datareceive, subscription) => {
-        setData(datareceive);
-      }, '\r\n');
-      // }
-    }
-  }, []);
-
-  useEffect(() => {
-    init();
-  }, []);
   return (
-    <View>
-      <Text>{data}</Text>
-    </View>
+    <>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        enabled
+      >
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{ flex: 1 }}
+        >
+          <Container>
+            <View>
+              <Title>Device</Title>
+            </View>
+            <Form ref={formRef}>
+              <Button onPress={() => formRef.current?.submitForm()}>
+                Entrar
+              </Button>
+            </Form>
+          </Container>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </>
   );
 };
 
-export default SingIn;
+export default SignIn;

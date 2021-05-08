@@ -5,7 +5,6 @@ import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.nuttawutmalee.RCTBluetoothSerial.RCTBluetoothSerialPackage;
 import com.facebook.react.ReactInstanceManager;
